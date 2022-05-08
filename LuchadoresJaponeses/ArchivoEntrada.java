@@ -17,7 +17,7 @@ public class ArchivoEntrada {
 		Scanner myReader = null;
 		
 		try {
-			File archivo = new File("C:\\Users\\jkach\\eclipse-workspace\\ejercicioOIA\\" + this.nombreArchivo + ".in");
+			File archivo = new File("\\eclipse-workspace\\ejercicioOIA\\" + this.nombreArchivo + ".in");
 			myReader = new Scanner(archivo);
 			myReader.useLocale(Locale.ENGLISH);
 			listaLuchadores = new ArrayList<Luchador>();

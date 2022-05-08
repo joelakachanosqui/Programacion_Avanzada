@@ -15,7 +15,7 @@ public class ArchivoSalida {
 		PrintWriter myWriter = null;
 		
 		try {
-			archivoOut = new FileWriter("C:\\Users\\jkach\\eclipse-workspace\\ejercicioOIA\\" + this.nombreArchivo + ".out");
+			archivoOut = new FileWriter("\\eclipse-workspace\\ejercicioOIA\\" + this.nombreArchivo + ".out");
 			myWriter = new PrintWriter(archivoOut);
 			
 			for(int i=0; i<luchadoresDominados.length; i++) {
