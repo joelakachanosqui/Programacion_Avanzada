@@ -2,7 +2,7 @@ package MesadasGranito;
 
 import java.util.*;
 
-public class Mesada implements Comparator<Mesada> {
+public class Mesada {
 	int largo;
 	int ancho;
 	
@@ -70,10 +70,5 @@ public class Mesada implements Comparator<Mesada> {
 	@Override
 	public String toString() {
 		return largo + " " + ancho;
-	}
-
-	@Override
-	public int compare(Mesada o1, Mesada o2) {
-		return (o1.largo-o2.largo);
 	}
 }
