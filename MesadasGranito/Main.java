@@ -6,7 +6,7 @@ public class Main {
 		String nombreArchivo = "mesadas";
 		ArchivoEntrada archivoEntrada = new ArchivoEntrada(nombreArchivo);
 		Mesada mesadas = new Mesada();
-				
+		
 		int cantidadApilados = mesadas.compararMesadas(archivoEntrada.readFile());
 				
 		ArchivoSalida archivoSalida = new ArchivoSalida(nombreArchivo);
@@ -17,5 +17,4 @@ public class Main {
 		archivoSalida.writeFile(cantidadApilados);
 
 	}
-
 }

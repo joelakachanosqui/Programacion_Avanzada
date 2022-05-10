@@ -2,7 +2,7 @@ package MesadasGranito;
 
 import java.util.*;
 
-public class Mesada {
+public class Mesada implements Comparator<Mesada> {
 	int largo;
 	int ancho;
 	
@@ -14,40 +14,47 @@ public class Mesada {
 	public Mesada() {
 		
 	}
-
+	
 	public boolean puedeApilar(Mesada mesada) {
-		return (mesada.ancho <= this.ancho && mesada.largo <= this.largo || 
-				mesada.largo <= this.ancho && mesada.ancho <= this.largo);
+		return ((mesada.largo <= this.largo && mesada.ancho <= this.ancho) ||
+				(mesada.largo <= this.ancho && mesada.ancho <= this.largo));
 	}
 	
-	public int compararMesadas(ArrayList<Mesada> listaMesada) {		
+	public int compararMesadas(List<Mesada> listaMesada) {	
 		
-									//Imprimo solo a modo informativo
+		//Ordeno la lista - Se puede optimizar
+		Collections.sort(listaMesada, new Comparator<Mesada>() {			
+		    @Override
+		    public int compare(Mesada o1, Mesada o2) {
+		    	return (o2.largo-o1.largo);
+		    }
+		});
+				
+		//Imprimo solo a modo informativo
 		for(Mesada mesada:listaMesada)
 			System.out.println(mesada);
 
-		int cantidadApilados = 0, auxiliarApilados;
+		int cantidadApilados = 1;
 		
 		for(int i=0; i<listaMesada.size(); i++) {
-			int auxI = i;
+			//Por leer la primera mesada ya asumo que hay una apilada
+			cantidadApilados = 1;
 			
-			auxiliarApilados = 0;
-			
-			for(int j=0; j<listaMesada.size(); j++) {
-				if(auxI==j && j<listaMesada.size()-1)
-					j++;
-				if(listaMesada.get(auxI).puedeApilar(listaMesada.get(j))) {
-					auxiliarApilados++;
-				}
-			
-		
-			if(i==0)
-				cantidadApilados = auxiliarApilados;
-			else if(auxiliarApilados>cantidadApilados)
-				cantidadApilados = auxiliarApilados;
+			//Asigno a j en una posición más adelante que i para comparar
+			for(int j=i+1; j<listaMesada.size(); j++) {
+				if(listaMesada.get(i).puedeApilar(listaMesada.get(j))) {
+					cantidadApilados++;
+					
+					//Si apiló al último elemento devuelvo la cantidad de apilados
+					if(j == listaMesada.size()-1)
+						return cantidadApilados;
+					
+				// Si la mesada siguiente no se puede apilar, salgo del segundo for e incremento i
+				} else
+					j = listaMesada.size()-1;		
 			}
 		}
-			
+		
 		return cantidadApilados;
 	}
 	
@@ -64,7 +71,9 @@ public class Mesada {
 	public String toString() {
 		return largo + " " + ancho;
 	}
-	
 
-	
+	@Override
+	public int compare(Mesada o1, Mesada o2) {
+		return (o1.largo-o2.largo);
+	}
 }

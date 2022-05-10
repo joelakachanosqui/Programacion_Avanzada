@@ -10,12 +10,12 @@ public class ArchivoSalida {
 		this.nombreArchivo = nombreArchivo;
 	}
 
-	public void writeFile(int cantidadApilados) { //Cambiar
+	public void writeFile(int cantidadApilados) { 
 		FileWriter archivoOut = null;
 		PrintWriter myWriter = null;
 		
 		try {
-			archivoOut = new FileWriter("C:\\Users\\jkach\\eclipse-workspace\\ejercicioOIA\\src\\MesadasGranito\\" + this.nombreArchivo + ".out");
+			archivoOut = new FileWriter("\\src\\MesadasGranito\\" + this.nombreArchivo + ".out");
 			myWriter = new PrintWriter(archivoOut);
 			
 			myWriter.println(cantidadApilados);
