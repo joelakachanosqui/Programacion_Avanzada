@@ -2,7 +2,7 @@ package MesadasGranito;
 
 import java.util.*;
 
-public class Mesada {
+public class Mesada implements Comparable<Mesada> {
 	int largo;
 	int ancho;
 	
@@ -21,40 +21,21 @@ public class Mesada {
 	}
 	
 	public int compararMesadas(List<Mesada> listaMesada) {	
-		
-		//Ordeno la lista - Se puede optimizar
-		Collections.sort(listaMesada, new Comparator<Mesada>() {			
-		    @Override
-		    public int compare(Mesada o1, Mesada o2) {
-		    	return (o2.largo-o1.largo);
-		    }
-		});
 				
 		//Imprimo solo a modo informativo
 		for(Mesada mesada:listaMesada)
 			System.out.println(mesada);
 
 		int cantidadApilados = 1;
-		
-		for(int i=0; i<listaMesada.size(); i++) {
-			//Por leer la primera mesada ya asumo que hay una apilada
-			cantidadApilados = 1;
+		Mesada mesadaAnt = listaMesada.get(0);
 			
-			//Asigno a j en una posición más adelante que i para comparar
-			for(int j=i+1; j<listaMesada.size(); j++) {
-				if(listaMesada.get(i).puedeApilar(listaMesada.get(j))) {
-					cantidadApilados++;
-					
-					//Si apiló al último elemento devuelvo la cantidad de apilados
-					if(j == listaMesada.size()-1)
-						return cantidadApilados;
-					
-				// Si la mesada siguiente no se puede apilar, salgo del segundo for e incremento i
-				} else
-					j = listaMesada.size()-1;		
-			}
+		for(Mesada mesadaActual : listaMesada) {
+			if(!mesadaAnt.puedeApilar(mesadaActual))
+				cantidadApilados++;
+			
+			mesadaAnt = mesadaActual;
 		}
-		
+
 		return cantidadApilados;
 	}
 	
@@ -70,5 +51,20 @@ public class Mesada {
 	@Override
 	public String toString() {
 		return largo + " " + ancho;
+	}
+
+	@Override
+	public int compareTo(Mesada otraMesada) {
+		if (this.ancho > otraMesada.ancho)
+			return 1;
+		if (this.ancho < otraMesada.ancho)
+			return -1;
+		if (this.ancho == otraMesada.ancho) {
+			if (this.largo > otraMesada.largo)
+				return 1;
+			if (this.largo < otraMesada.largo)
+				return -1;
+		}
+		return 0;
 	}
 }

@@ -4,24 +4,24 @@ import java.io.*;
 import java.util.*;
 
 
-public class ArchivoEntrada {
+public class Archivo {
 	private String nombreArchivo;
 	
-	public ArchivoEntrada(String nombreArchivo) {
+	public Archivo(String nombreArchivo) {
 		this.nombreArchivo = nombreArchivo;
 	}
 
-	public List<Mesada> readFile() {
+	public ArrayList<Mesada> readFile() {
 	
-		List<Mesada> listaMesadas = null;
+		ArrayList<Mesada> listaMesadas = null;
 		
 		Scanner myReader = null;
 		
 		try {
-			File archivo = new File("\\src\\MesadasGranito\\" + this.nombreArchivo + ".in");
+			File archivo = new File(this.nombreArchivo + ".in");
 			myReader = new Scanner(archivo);
 			myReader.useLocale(Locale.ENGLISH);
-			listaMesadas = new LinkedList<Mesada>();
+			listaMesadas = new ArrayList<Mesada>();
 			int cantidadMesadas = myReader.nextInt();
 			int ancho, largo;
 			
@@ -36,7 +36,7 @@ public class ArchivoEntrada {
 					listaMesadas.add(mesada);
 				}
 			}
-			
+						
 		} catch(FileNotFoundException exception) {
 			exception.printStackTrace();
 			System.out.println(exception.getCause());
@@ -44,6 +44,26 @@ public class ArchivoEntrada {
 			myReader.close();
 		}
 		
+		Collections.sort(listaMesadas, Collections.reverseOrder());
+		
 		return listaMesadas;
+	}
+	
+	public void writeFile(int cantidadApilados) { 
+		FileWriter archivoOut = null;
+		PrintWriter myWriter = null;
+		
+		try {
+			archivoOut = new FileWriter(this.nombreArchivo + ".out");
+			myWriter = new PrintWriter(archivoOut);
+			
+			myWriter.println(cantidadApilados);
+			
+		} catch (Exception exception) {
+			exception.printStackTrace();
+		} finally {
+			myWriter.close();
+		}
+		
 	}
 }
