@@ -13,7 +13,7 @@ public class Archivo {
 	String name;
 	
 	Archivo(){
-		this.name = "equipos";
+		this.name = "formandoEquipos";
 	}
 	
 	public List<String> readFile() {
